@@ -56,7 +56,8 @@ const resolvers = {
 			return { token, user };
 		},
 		async saveBook({ user, body }, res) {
-			console.log(user);
+			console.log("user", user);
+			console.log("body", body);
 			try {
 				const updatedUser = await User.findOneAndUpdate(
 					{ _id: user._id },

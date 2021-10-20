@@ -5,4 +5,5 @@ typeDefs
 
 FRONT END
 
-queries/mutations
+queries.js/mutations.js
+component javascript 
