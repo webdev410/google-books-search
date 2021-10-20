@@ -5,10 +5,24 @@ const { signToken } = require("../utils/auth");
 const resolvers = {
 	Query: {
 		users: async () => {
-			return User.find().populate("thoughts");
+			return User.find();
 		},
-		user: async (parent, { username }) => {
-			return User.findOne({ username }).populate("thoughts");
+		// get a single user by either their id or their username
+		async getSingleUser({ user = null, params }, res) {
+			const foundUser = await User.findOne({
+				$or: [
+					{ _id: user ? user._id : params.id },
+					{ username: params.username },
+				],
+			});
+
+			if (!foundUser) {
+				return res
+					.status(400)
+					.json({ message: "Cannot find a user with this id!" });
+			}
+
+			res.json(foundUser);
 		},
 
 		me: async (parent, args, context) => {
