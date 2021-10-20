@@ -1,0 +1,8 @@
+BACKEND
+
+resolvers
+typeDefs
+
+FRONT END
+
+queries/mutations
